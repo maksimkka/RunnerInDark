@@ -9,6 +9,7 @@ namespace Code.Hero
         public Rigidbody HeroRigidbody;
         public float Speed;
         public float JumpForce;
+        public float CollectRadius;
         public bool IsGround;
     }
 }

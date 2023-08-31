@@ -28,12 +28,12 @@ namespace Code.Hero
                 {
                     heroData.HeroRigidbody.AddForce(0, heroData.JumpForce, 0, ForceMode.Impulse);
                     heroData.IsGround = false;
-                    $"222222222".Colored(Color.cyan).Log();
+                    //$"222222222".Colored(Color.cyan).Log();
                 }
                 else
                 {
                     heroData.IsGround = false;
-                    $"333333333".Colored(Color.cyan).Log();
+                    //$"333333333".Colored(Color.cyan).Log();
                 }
             }
         }

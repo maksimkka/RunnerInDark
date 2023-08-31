@@ -1,8 +1,11 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
+using Code.Bonus;
 using Code.Ground;
 using Code.Hero;
+using Code.HUD.FIreIndicators;
+using Code.Water;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using UnityEngine;
@@ -53,12 +56,15 @@ namespace Code.Main
         private void InjectGameObjects()
         {
             var heroSettings = FindObjectOfType<HeroSettings>(true);
+            var indicators = FindObjectOfType<Indicators>(true);
             var groundMarkers = FindObjectsOfType<GroundMarker>(true);
+            var waterSettings = FindObjectsOfType<WaterSettings>(true);
+            var bonusMarkers = FindObjectsOfType<BonusMarker>(true);
 
 
             foreach (var system in _systems)
             {
-                system.Value.Inject(heroSettings, groundMarkers);
+                system.Value.Inject(heroSettings, groundMarkers, waterSettings, indicators, bonusMarkers);
             }
         }
 
@@ -83,11 +89,17 @@ namespace Code.Main
         {
             _systems[SystemType.Init]
                 .Add(new HeroInit())
-                .Add(new GroundInit());
+                .Add(new GroundInit())
+                .Add(new WaterInit())
+                .Add(new IndicatorsInit())
+                .Add(new BonusInit());
 
             _systems[SystemType.Update]
                 .Add(new GroundChecker())
-                .Add(new HeroJump());
+                .Add(new HeroJump())
+                .Add(new WaterCollision())
+                .Add(new IndicatorChanger())
+                .Add(new BonusCollector());
             
             _systems[SystemType.FixedUpdate]
                 .Add(new HeroMove());

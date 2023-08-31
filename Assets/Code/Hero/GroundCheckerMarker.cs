@@ -1,9 +1,9 @@
-﻿using Code.UnityPhysics;
+﻿using UnityEngine;
 
 namespace Code.Hero
 {
-    public struct GroundCheckerMarker
+    public class GroundCheckerMarker : MonoBehaviour
     {
-        public UnityPhysicsCollisionDetector Detector;
+        
     }
 }

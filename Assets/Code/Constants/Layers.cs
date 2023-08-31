@@ -10,4 +10,5 @@ public static class Layers
     public const int Ground = 6;
     public const int Hero = 7;
     public const int GroundChecker = 8;
+    public const int WaterChecker = 9;
 }
