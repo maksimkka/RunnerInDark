@@ -5,7 +5,7 @@ namespace Code.Water
     public struct WaterData
     {
         public UnityPhysicsCollisionDetector Detector;
-        public WaterType Type;
+        public WaterSettings WaterSettings;
         public int Damage;
     }
 }

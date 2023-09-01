@@ -1,5 +1,4 @@
 ﻿using Code.Bonus;
-using Code.Logger;
 using Code.Water;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
@@ -34,17 +33,18 @@ namespace Code.HUD.FIreIndicators
         {
             foreach (var bonusCollectEntity in _bonusCollectRequest.Value)
             {
-                ref var bonusCollect = ref _bonusCollectRequest.Pools.Inc1.Get(bonusCollectEntity);
+                _bonusCollectRequest.Pools.Inc1.Del(bonusCollectEntity);
                 foreach (var entity in _indicatorDataFilter.Value)
                 {
                     ref var indicatorData = ref _indicatorDataFilter.Pools.Inc1.Get(entity);
-                    
-                    if(indicatorData.IndexLastIncludedIndicator >= indicatorData.Indicators.IndicatorSettingsArray.Length -1) break;
+
+                    if (indicatorData.IndexLastIncludedIndicator >=
+                        indicatorData.Indicators.IndicatorSettingsArray.Length - 1) break;
+
                     indicatorData.IndexLastIncludedIndicator++;
-                    indicatorData.Indicators.IndicatorSettingsArray[indicatorData.IndexLastIncludedIndicator].SwitchOn();
+                    indicatorData.Indicators.IndicatorSettingsArray[indicatorData.IndexLastIncludedIndicator]
+                        .SwitchOn();
                 }
-                
-                _bonusCollectRequest.Pools.Inc1.Del(bonusCollectEntity);
             }
         }
 
@@ -57,6 +57,7 @@ namespace Code.HUD.FIreIndicators
                     indicator.SwitchOff();
                 }
 
+                ScreenSwitcher.ShowScreen(ScreenType.Defeat);
                 Time.timeScale = 0;
                 indicatorData.IndexLastIncludedIndicator = 0;
             }
@@ -65,6 +66,7 @@ namespace Code.HUD.FIreIndicators
             {
                 if (indicatorData.IndexLastIncludedIndicator <= 0)
                 {
+                    ScreenSwitcher.ShowScreen(ScreenType.Defeat);
                     Time.timeScale = 0;
                     indicatorData.Indicators.IndicatorSettingsArray[indicatorData.IndexLastIncludedIndicator]
                         .SwitchOff();

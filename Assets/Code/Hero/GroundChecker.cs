@@ -22,11 +22,8 @@ namespace Code.Hero
             ref var collisionData = ref _groundCollisionFilter.Pools.Inc2.Get(entity);
             foreach (var collisionEnter in collisionData.CollisionsEnter)
             {
-                var groundDataEntity = collisionEnter.dto.SelfEntity;
-                ref var groundData = ref _groundCollisionFilter.Pools.Inc1.Get(groundDataEntity);
                 if (collisionEnter.dto.OtherCollider.gameObject.layer == Layers.GroundChecker)
                 {
-                    //$"{collisionEnter.dto.OtherCollider.name} {collisionEnter.dto.SelfCollider}".Colored(Color.cyan).Log();
                     ChangeState();
                 }
             }

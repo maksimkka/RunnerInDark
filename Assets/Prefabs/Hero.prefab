@@ -26,7 +26,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2150910446018869775}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0.03, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -79,9 +79,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4b4ff9fe8e04466af8d278178faf267, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <Speed>k__BackingField: 200
-  <JumpForce>k__BackingField: 10
-  <CollectRadius>k__BackingField: 1
+  <Speed>k__BackingField: 3
+  <JumpForce>k__BackingField: 9.5
+  <CollectRadius>k__BackingField: 2
   <Light>k__BackingField: {fileID: 990620043130330582}
   <GroundCheckerMarker>k__BackingField: {fileID: 4151815729526686584}
   <WaterCheckerMarker>k__BackingField: {fileID: 4151815729649266220}
@@ -890,6 +890,10 @@ PrefabInstance:
     - target: {fileID: 3537922633520903793, guid: 7238c47c6cd182f48ab96ad644c0867f, type: 3}
       propertyPath: m_Intensity
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3537922633520903793, guid: 7238c47c6cd182f48ab96ad644c0867f, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 1511
       objectReference: {fileID: 0}
     - target: {fileID: 7059813526435886966, guid: 7238c47c6cd182f48ab96ad644c0867f, type: 3}
       propertyPath: m_Name

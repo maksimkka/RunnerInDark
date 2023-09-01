@@ -1,7 +1,5 @@
-﻿using Code.Logger;
-using Leopotam.EcsLite;
+﻿using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
-using UnityEngine;
 
 namespace Code.HUD.FIreIndicators
 {
@@ -15,10 +13,8 @@ namespace Code.HUD.FIreIndicators
             var entity = systems.GetWorld().NewEntity();
             ref var indicatorData = ref _indicatorData.Value.Add(entity);
 
-            $"{_indicators.Value}".Colored(Color.cyan).Log();
             indicatorData.Indicators = _indicators.Value;
             indicatorData.IndexLastIncludedIndicator = indicatorData.Indicators.IndicatorSettingsArray.Length - 1;
-            //indicatorData. = indicatorData.Indicators.IndicatorSettingsArray.Length;
         }
     }
 }

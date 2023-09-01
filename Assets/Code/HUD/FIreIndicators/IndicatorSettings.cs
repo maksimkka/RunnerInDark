@@ -3,6 +3,7 @@ using UnityEngine.UI;
 
 namespace Code.HUD.FIreIndicators
 {
+    [DisallowMultipleComponent]
     public class IndicatorSettings : MonoBehaviour
     {
         [field: SerializeField] private Image[] Images;

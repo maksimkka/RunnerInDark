@@ -4,6 +4,5 @@
     {
         public Indicators Indicators;
         public int IndexLastIncludedIndicator;
-        public int NumberIncludedIndicators;
     }
 }

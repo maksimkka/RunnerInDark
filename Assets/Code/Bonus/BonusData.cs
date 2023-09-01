@@ -1,9 +1,7 @@
-﻿using UnityEngine;
-
-namespace Code.Bonus
+﻿namespace Code.Bonus
 {
     public struct BonusData
     {
-        public GameObject BonusGameObject;
+        public BonusMarker BonusMarker;
     }
 }

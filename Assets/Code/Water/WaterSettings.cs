@@ -2,9 +2,9 @@
 
 namespace Code.Water
 {
+    [DisallowMultipleComponent]
     public class WaterSettings : MonoBehaviour
     {
-        [field: SerializeField] public WaterType Type { get; private set; }
         [field: SerializeField] public int Damage { get; private set; }
     }
 }

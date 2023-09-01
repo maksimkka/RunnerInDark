@@ -1,10 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
-using Code.Bonus;
+using Code.Chunks;
 using Code.Ground;
 using Code.Hero;
+using Code.HUD;
 using Code.HUD.FIreIndicators;
+using Code.HUD.Score;
 using Code.Water;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
@@ -15,11 +17,19 @@ namespace Code.Main
     [DisallowMultipleComponent]
     public class LevelEntryPoint : MonoBehaviour
     {
+        [SerializeField] private ScreenService _screenService;
         private readonly Dictionary<SystemType, EcsSystems> _systems = new();
         private readonly CancellationTokenSource _tokenSources = new();
         
         private EcsWorld _world;
         private EcsSystems _updateSystem;
+
+        private void Awake()
+        {
+            ScreenSwitcher.Initialize(_screenService.screens);
+            ScreenSwitcher.ShowScreen(ScreenType.Menu);
+            Time.timeScale = 0;
+        }
 
         private void Start()
         {
@@ -57,14 +67,13 @@ namespace Code.Main
         {
             var heroSettings = FindObjectOfType<HeroSettings>(true);
             var indicators = FindObjectOfType<Indicators>(true);
-            var groundMarkers = FindObjectsOfType<GroundMarker>(true);
-            var waterSettings = FindObjectsOfType<WaterSettings>(true);
-            var bonusMarkers = FindObjectsOfType<BonusMarker>(true);
+            var scoreSettings = FindObjectOfType<ScoreSettings>(true);
+            var chunkGeneratorSettings = FindObjectOfType<ChunkGeneratorSettings>(true);
 
 
             foreach (var system in _systems)
             {
-                system.Value.Inject(heroSettings, groundMarkers, waterSettings, indicators, bonusMarkers);
+                system.Value.Inject(heroSettings, indicators, chunkGeneratorSettings, scoreSettings);
             }
         }
 
@@ -88,18 +97,21 @@ namespace Code.Main
         private void AddGameSystems()
         {
             _systems[SystemType.Init]
-                .Add(new HeroInit())
+                .Add(new ChunksGeneratorInit())
                 .Add(new GroundInit())
                 .Add(new WaterInit())
+                .Add(new HeroInit())
                 .Add(new IndicatorsInit())
-                .Add(new BonusInit());
+                .Add(new ScoreInit());
 
             _systems[SystemType.Update]
                 .Add(new GroundChecker())
                 .Add(new HeroJump())
                 .Add(new WaterCollision())
                 .Add(new IndicatorChanger())
-                .Add(new BonusCollector());
+                .Add(new BonusCollector())
+                .Add(new ChunkGenerator())
+                .Add(new ScoreCounter());
             
             _systems[SystemType.FixedUpdate]
                 .Add(new HeroMove());

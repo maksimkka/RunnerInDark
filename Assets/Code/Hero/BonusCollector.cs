@@ -12,15 +12,18 @@ namespace Code.Hero
         private readonly EcsPoolInject<BonusCollectRequest> _bonusCollectRequest = default;
 
         private EcsWorld _world;
+
         public void Run(IEcsSystems systems)
         {
             _world = systems.GetWorld();
-            
+
             foreach (var entity in _bonusDataFilter.Value)
             {
                 ref var _bonusData = ref _bonusDataFilter.Pools.Inc1.Get(entity);
-                if(!_bonusData.BonusGameObject.activeSelf) continue;
-                CheckDistance(_bonusData.BonusGameObject.transform);
+                if (_bonusData.BonusMarker.gameObject.activeSelf)
+                {
+                    CheckDistance(_bonusData.BonusMarker.transform);
+                }
             }
         }
 
@@ -38,7 +41,7 @@ namespace Code.Hero
                 }
             }
         }
-        
+
         private void CollectBonus(Transform bonusTransform)
         {
             var newEntity = _world.NewEntity();

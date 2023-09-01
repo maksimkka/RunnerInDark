@@ -5,5 +5,6 @@ namespace Code.Ground
     public struct GroundData
     {
         public UnityPhysicsCollisionDetector Detector;
+        public GroundMarker GroundMarker;
     }
 }

@@ -1,5 +1,4 @@
-﻿using Code.Logger;
-using Leopotam.EcsLite;
+﻿using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
 using UnityEngine;
 
@@ -7,7 +6,8 @@ namespace Code.Hero
 {
     public class HeroMove : IEcsRunSystem
     {
-        private readonly EcsFilterInject<Inc<HeroData>> _heroFilter;
+        private readonly EcsFilterInject<Inc<HeroData>> _heroFilter = default;
+
         public void Run(IEcsSystems systems)
         {
             foreach (var entity in _heroFilter.Value)
@@ -20,7 +20,7 @@ namespace Code.Hero
 
         private void Move(ref HeroData heroData)
         {
-            heroData.HeroRigidbody.velocity = new Vector3(0, heroData.HeroRigidbody.velocity.y, heroData.Speed * Time.deltaTime);
+            heroData.HeroGameObject.transform.Translate(new Vector3(0, 0, heroData.Speed * Time.fixedDeltaTime));
         }
     }
 }

@@ -1,8 +1,6 @@
-﻿using Code.Logger;
-using Code.UnityPhysics;
+﻿using Code.UnityPhysics;
 using Leopotam.EcsLite;
 using Leopotam.EcsLite.Di;
-using UnityEngine;
 
 namespace Code.Water
 {
@@ -34,31 +32,10 @@ namespace Code.Water
                         ref var waterCollisionRequest = ref _waterCollisionRequest.Value.Add(entity);
                         waterCollisionRequest.Damage = waterData.Damage;
                     }
-
-                    //DefaultWaterCollision(ref waterData);
-
-                    // if (waterData.Type == WaterType.DefaultWater)
-                    // {
-                    // }
-                    //
-                    // else if(waterData.Type == WaterType.DeadlyWater)
-                    // {
-                    //     DeadlyWaterCollision(ref waterData);
-                    // }
                 }
             }
             
             collisionData.CollisionsEnter.Clear();
-        }
-
-        private void DefaultWaterCollision(ref WaterData waterData)
-        {
-            $"STOLKNULSYA".Colored(Color.cyan).Log();
-        }
-        
-        private void DeadlyWaterCollision(ref WaterData waterData)
-        {
-            $"STOLKNULSYA".Colored(Color.cyan).Log();
         }
     }
 }
