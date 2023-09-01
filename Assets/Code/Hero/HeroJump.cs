@@ -20,7 +20,7 @@ namespace Code.Hero
 
         private void Jump(ref HeroData heroData)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            if (Input.GetMouseButtonDown(0))
             {
                 if (heroData.IsGround)
                 {
